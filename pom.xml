@@ -96,7 +96,7 @@
 				<executions>
 					<execution>
 						<configuration>
-							<mainClass>com.aa.apauto.cache.feeder.flt.App</mainClass>
+							<mainClass>ru.cinimex.exporter.ExporterLauncher</mainClass>
 							<!-- Optional -->
 							<onejarVersion>0.97</onejarVersion>
 							<!-- Optional, use only if you need to include native libraries (dll's) -->
