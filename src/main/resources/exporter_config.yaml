@@ -3,17 +3,17 @@ qmgrConnectionParams:
   # Queue manager name.
   qmgrName: QM
   # Queue manager host.
-  qmgrHost:
+  qmgrHost: esmqsi2.pdc.aa.com
   # Queue manager connection port.
-  qmgrPort: 0
+  qmgrPort: 1436
   # Queue manager connection channel.
-  qmgrChannel:
+  qmgrChannel: ESMQSI2.VPNG.02
   # Username, which will be used for connection (optional).
   # User must have permission to subscribe to the topic $SYS/MQ/INFO/QMGR/QM/Monitor/ and all subtopics.
   # User also must have permission to inquire  channels, queues and listeners listed below in Monitoring objects section!
-  user: mqm
+  user: vpmqssi
   # Password, which will be used for connection (optional).
-  password: mqm
+  password: ax7$uNv42573
   # Use MQCSP for connection?
   mqscp: false
   # How long to wait until metrics are published by queue manager (milliseconds).
