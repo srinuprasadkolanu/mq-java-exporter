@@ -1,0 +1,50 @@
+# Maven
+# Build your Java project and run tests with Apache Maven. 
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+
+trigger:
+- master
+- release-stage*
+
+pool:
+  name: 'Default-Linux'
+
+resources:
+- repo: self
+
+variables:
+  tag: '$(Build.BuildId)'
+    
+steps:
+
+- task: Maven@3
+  displayName: 'Maven pom.xml'
+  inputs:
+    goals: 'clean install'
+    options: '-DskipTests'
+    publishJUnitResults: false
+
+- task: Docker@1
+  displayName: 'Build an image for $(buildEnv)'
+  inputs:
+    containerregistrytype: "Container Registry"
+    dockerRegistryEndpoint: "AA Az Docker"
+    dockerFile: '**/Dockerfile'
+    arguments: '--no-cache'
+    imageName: 'packages.aa.com/docker-dev/get/apt-getng/$(Build.DefinitionName):$(Build.BuildId)'
+
+- task: ArtifactoryDocker@1
+  displayName: "Push an image"
+  inputs:
+    command: 'push'
+    artifactoryService: 'Artifactory - Azure -zacct'
+    targetRepo: 'docker-dev'
+    imageName: 'packages.aa.com/docker-dev/get/apt-getng/$(Build.DefinitionName):$(Build.BuildId)'
+    collectBuildInfo: true
+
+- task: ArtifactoryPublishBuildInfo@1
+  inputs:
+    artifactoryService: 'Artifactory - Azure -zacct'
+    buildName: '$(Build.DefinitionName)'
+    buildNumber: '$(Build.BuildNumber)'
