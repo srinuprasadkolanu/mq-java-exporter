@@ -1,7 +1,7 @@
 # MQ connection information -------------------------------
 qmgrConnectionParams:
   # Queue manager name.
-  qmgrName: QM
+  qmgrName: ESMQSI2
   # Queue manager host.
   qmgrHost: esmqsi2.pdc.aa.com
   # Queue manager connection port.
